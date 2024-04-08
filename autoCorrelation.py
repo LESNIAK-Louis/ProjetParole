@@ -7,9 +7,9 @@ def windowcorrelation(sig1, sig2):
 def coeffautocorrelation(sig, L, N, i):
     rn0 = windowcorrelation(sig[i:i+N], sig[i:i+N])
     autocorr_coeffs = []
-    for l in range(33, L):
+    for l in range(44, L):
         autocorr_coeffs.append(windowcorrelation(sig[i:i+N], sig[i+l:i+l+N])/rn0)
-    return (np.argmax(autocorr_coeffs)+33, np.max(autocorr_coeffs))
+    return (np.argmax(autocorr_coeffs)+44, np.max(autocorr_coeffs))
 
 
 def computeAutoCorrelation(signal, m, N, L):

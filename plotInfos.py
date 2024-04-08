@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 
 def plotValues(title, signal, energy, zero, autoCorrelTabL, decisions, f0):
-    fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(7)
+    fig, (ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(6)
     fig.suptitle(title)
 
     ax1.set_title("Signal")
-    ax1.set(xlabel="temps (echt)", xticks=[0, 5301,10602,15903,21204,26505,31806,37107,42408,47709])
+    ax1.set(xlabel="temps (echt)")
     ax1.set(ylabel="Hz")
     ax1.plot(signal, 'tab:blue')
 
