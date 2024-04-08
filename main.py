@@ -1,4 +1,4 @@
-import sys
+import sys, os 
 from scipy.io.wavfile import read
 
 from plotInfos import plotValues
@@ -7,7 +7,7 @@ from energy import computeEnergy
 from zeroCrossing import computeZeroCrossing
 from autoCorrelation import computeAutoCorrelation
 from f0 import computeF0
-from evalutation import writeFile, compareFiles
+from evalutation import writeFile
 
 
 def signalMean(signal):
@@ -20,7 +20,10 @@ def signalMean(signal):
 
 
 # MAIN
-freqsampling, signalTab = read(sys.argv[1])
+filename = sys.argv[1]
+output_file = os.path.splitext(filename)[0] + ".f0"
+
+freqsampling, signalTab = read(filename)
 
 signalTab = signalTab - signalMean(signalTab)
 
@@ -35,14 +38,9 @@ N = int(25*freqsampling/1000)
 
 autoCorrelTabL, autoCorrelTabCoeffs  = computeAutoCorrelation(signalTab, M, N, L)
 
-f0Passage0, f0Energy, decisions = computeF0(freqsampling, autoCorrelTabL, zeroTab, energyTab)
+f0, f0Energy, decisions = computeF0(freqsampling, autoCorrelTabL, zeroTab, energyTab)
 
-plotValues(sys.argv[1], signalTab, energyTab, zeroTab, autoCorrelTabL, decisions, f0Passage0, f0Energy)
+#plotValues(sys.argv[1], signalTab, energyTab, zeroTab, autoCorrelTabL, decisions, f0)
 
-"""
-OUTPUT_FILE = "output.txt"
-
-writeFile(OUTPUT_FILE, f0Passage0, decisions, autoCorrelTabCoeffs)
-compareFiles(OUTPUT_FILE, nameFileRef=OUTPUT_FILE)
-"""
+writeFile(output_file, f0, decisions, autoCorrelTabCoeffs)
 

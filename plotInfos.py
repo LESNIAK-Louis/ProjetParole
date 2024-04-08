@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def plotValues(title, signal, energy, zero, autoCorrelTabL, decisions, f0Passage0, f0Energy):
+def plotValues(title, signal, energy, zero, autoCorrelTabL, decisions, f0):
     fig, (ax1, ax2, ax3, ax4, ax5, ax6, ax7) = plt.subplots(7)
     fig.suptitle(title)
 
@@ -29,15 +29,10 @@ def plotValues(title, signal, energy, zero, autoCorrelTabL, decisions, f0Passage
     ax5.set(ylabel="")
     ax5.plot(decisions, 'tab:green')
 
-    ax6.set_title("F0 - Passage à 0")
+    ax6.set_title("F0")
     ax6.set(xlabel="temps (echt)")
     ax6.set(ylabel="")
-    ax6.plot(f0Passage0, 'tab:orange')
-
-    ax7.set_title("F0 - Energie")
-    ax7.set(xlabel="temps (echt)")
-    ax7.set(ylabel="")
-    ax7.plot(f0Energy, 'tab:orange')
+    ax6.plot(f0, 'tab:orange')
 
     #plt.tight_layout()
     plt.show()

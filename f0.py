@@ -16,7 +16,7 @@ def computeF0(freqsampling, autoCorrelTab, zeroTab, energyTab):
 
     f0Passage0 = []
     lastDecision0 = 1
-    SEUIL_HAUT_0 = 0.20
+    SEUIL_HAUT_0 = 0.15
     SEUIL_BAS_0 = 0.08
 
     f0Energy = []
@@ -37,6 +37,6 @@ def computeF0(freqsampling, autoCorrelTab, zeroTab, energyTab):
         else:
             f0Energy.append( 0 )
 
-        decisions.append(lastDecision0)
+        decisions.append(lastDecision0 and lastDecisionE)
 
     return (f0Passage0, f0Energy, decisions)
