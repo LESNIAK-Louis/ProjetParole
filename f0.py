@@ -25,7 +25,7 @@ def computeF0(freqsampling, autoCorrelTab, zeroTab, energyTab):
     
     for i in range(0, len(autoCorrelTab)):
         lastDecision0 = decision(zeroTab, i, lastDecision0, SEUIL_BAS_0, SEUIL_HAUT_0)
-        lastDecisionE = decision(energyTab, i, lastDecisionE, SEUIL_BAS_E, SEUIL_HAUT_E)
+        lastDecisionE = 1 - decision(energyTab, i, lastDecisionE, SEUIL_BAS_E, SEUIL_HAUT_E)
         
         if lastDecision0 and lastDecisionE:
             f0.append( int(float(freqsampling) /  float(autoCorrelTab[i])) )

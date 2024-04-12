@@ -1,3 +1,5 @@
+import numpy as np
+
 def writeFile(name, f0, decision, coeffAutoCorrel):
     f = open(name, "w")
     for i in range(0, len(f0)):
@@ -39,9 +41,9 @@ def compareFiles(name1, nameFileRef):
             
             if deltaf0 > 0.95 and deltaf0 < 1.05:
                 edouble += 1
-            elif deltaf0 > 0.45 and deltaf0 < 0.55:
+            if deltaf0 > 0.45 and deltaf0 < 0.55:
                 emoitie += 1
-            elif deltaf0 > 0.2:
+            if deltaf0 > 0.2:
                 e20 += 1
 
             nb_voisee += 1
@@ -58,8 +60,8 @@ def compareFiles(name1, nameFileRef):
     edouble = edouble / nb_voisee
 
     print("Résultats de la comparaison des fichiers " + name1 + " et " + nameFileRef + " :")
-    print("Erreurs voisement : " + str(evoist))
-    print("Erreurs 20% : " + str(e20))
-    print("Erreurs 50% : " + str(edouble))
-    print("Erreurs 100% : " + str(emoitie))
+    print("Erreurs voisement : " + str(np.around(evoist * 100, decimals=2)) + " %")
+    print("Erreurs 20 % : " + str(np.around(e20 * 100,decimals=2)) + " %")
+    print("Erreurs 50 % : " + str(np.around(edouble * 100,decimals=2)) + " %")
+    print("Erreurs 100 % : " + str(np.around(emoitie * 100,decimals=2)) + " %")
     print("\n")
