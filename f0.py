@@ -21,7 +21,7 @@ def computeF0(freqsampling, autoCorrelTab, zeroTab, energyTab):
 
     lastDecisionE = 1
     SEUIL_HAUT_E = 95
-    SEUIL_BAS_E = 75
+    SEUIL_BAS_E = 70
     
     for i in range(0, len(autoCorrelTab)):
         lastDecision0 = decision(zeroTab, i, lastDecision0, SEUIL_BAS_0, SEUIL_HAUT_0)

@@ -15,7 +15,7 @@ def coeffautocorrelation(sig, L, N, i):
 def computeAutoCorrelation(signal, m, N, L):
     autocorr_evolutions = []
     autocorr_coeffs = []
-    for i in range(0, len(signal)-(2*N), m):
+    for i in range(0, len(signal)-(2*max(L,N)), m):
         l, coeff = coeffautocorrelation(signal, L, N, i)
         autocorr_evolutions.append(l)
         autocorr_coeffs.append(coeff)

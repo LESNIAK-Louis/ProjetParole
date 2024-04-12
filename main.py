@@ -29,13 +29,11 @@ def main(args):
     signalTab = signalTab - signalMean(signalTab)
 
     M = int(8*freqsampling/1000)
-    N = int(16*freqsampling/1000)
+    N = int(10*freqsampling/1000)
     L = int(25*freqsampling/1000)
 
     energyTab = computeEnergy(signalTab, M, N)
     zeroTab = computeZeroCrossing(signalTab, M, N)
-
-    N = int(25*freqsampling/1000)
 
     autoCorrelTabL, autoCorrelTabCoeffs  = computeAutoCorrelation(signalTab, M, N, L)
 
