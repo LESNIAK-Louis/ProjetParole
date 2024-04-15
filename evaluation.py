@@ -59,9 +59,8 @@ def compareFiles(name1, nameFileRef):
     emoitie = emoitie / nb_voisee
     edouble = edouble / nb_voisee
 
-    print("Résultats de la comparaison des fichiers " + name1 + " et " + nameFileRef + " :")
-    print("Erreurs voisement : " + str(np.around(evoist * 100, decimals=2)) + " %")
-    print("Erreurs 20 % : " + str(np.around(e20 * 100,decimals=2)) + " %")
-    print("Erreurs 50 % : " + str(np.around(edouble * 100,decimals=2)) + " %")
-    print("Erreurs 100 % : " + str(np.around(emoitie * 100,decimals=2)) + " %")
-    print("\n")
+    print("Résultats de la comparaison des fichiers \"" + name1 + "\" et \"" + nameFileRef + "\" :" + "\n")
+    print("Taux d'erreurs de décision de voisement/non-voisement : " + str(np.around(evoist * 100, decimals=2)) + " %")
+    print("Taux d'erreurs supérieures à 20% : " + str(np.around(e20 * 100,decimals=2)) + " %")
+    print("Taux d'erreurs proche de 50% : " + str(np.around(edouble * 100,decimals=2)) + " %")
+    print("Taux d'erreurs proche de 100% : " + str(np.around(emoitie * 100,decimals=2)) + " %")

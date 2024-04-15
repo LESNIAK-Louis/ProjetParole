@@ -22,33 +22,48 @@ def main(args):
     ref_file = args.r
     plot_graph = args.p
 
-    output_file = os.path.splitext(filename)[0] + ".f0"
+    path, ext = os.path.splitext(filename)
 
-    freqsampling, signalTab = read(filename)
+    output_file = ""
+    if(ext == ".wav"): # Analyse du fichier son
+        output_file = path + ".f0"
 
-    signalTab = signalTab - signalMean(signalTab)
+        freqsampling, signalTab = read(filename)
 
-    M = int(10*freqsampling/1000)
-    N = int(32*freqsampling/1000)
-    L = int(25*freqsampling/1000)
+        signalTab = signalTab - signalMean(signalTab)
 
-    energyTab = computeEnergy(signalTab, M, N)
-    zeroTab = computeZeroCrossing(signalTab, M, N)
+        M = int(10*freqsampling/1000)
+        N = int(32*freqsampling/1000)
+        L = int(25*freqsampling/1000)
 
-    autoCorrelTabL, autoCorrelTabCoeffs  = computeAutoCorrelation(signalTab, M, N, L)
+        energyTab = computeEnergy(signalTab, M, N)
+        zeroTab = computeZeroCrossing(signalTab, M, N)
 
-    f0, decisions = computeF0(freqsampling, autoCorrelTabL, zeroTab, energyTab)
+        autoCorrelTabL, autoCorrelTabCoeffs  = computeAutoCorrelation(signalTab, M, N, L)
 
-    if plot_graph:
-        plotValues(filename, signalTab, energyTab, zeroTab, autoCorrelTabL, decisions, f0)
+        f0, decisions = computeF0(freqsampling, autoCorrelTabL, zeroTab, energyTab)
 
-    writeFile(output_file, f0, decisions, autoCorrelTabCoeffs)
-    compareFiles(output_file, ref_file)
+        if plot_graph:
+            plotValues(filename, signalTab, energyTab, zeroTab, autoCorrelTabL, decisions, f0)
+
+        writeFile(output_file, f0, decisions, autoCorrelTabCoeffs)
+
+    elif(ext == ".f0"): # Fichier déjà analysé à comparer
+        output_file = filename
+        if(not ref_file):
+            print("Veuillez spécifier un fichier de référence en argument (-r PATH).")
+            sys.exit(1)
+    else:
+        print("Argument(s) invalide(s).")
+        sys.exit(1)
+
+    if(ref_file): # Fichier de référence pour la comparaison
+        compareFiles(output_file, ref_file)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("f", help="Entrez le chemin du fichier .wav à analyser")
-    parser.add_argument("r", help="Entrez le fichier de référence à comparer (.f0)")
+    parser.add_argument("f", help="Entrez le chemin du fichier .wav à analyser ou celui d'un fichier .f0 à comparer")
+    parser.add_argument("-r", help="Entrez le fichier de référence à comparer (.f0)")
     parser.add_argument("-p", help="Afficher ou non les graphiques correspondants", action='store_true')
     args = parser.parse_args()
     main(args)
