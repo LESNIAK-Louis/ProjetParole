@@ -12,7 +12,7 @@ def windowenergy(partie_du_signal):
 def computeEnergy(signal, m, N):
     energie = []
 
-    for i in range(0, len(signal)-N, m): 
+    for i in range(0, len(signal)-(2*N), m): 
         energie.append(windowenergy(signal[i:i+N+1]))
 
-    return 10*np.log10(energie)
+    return np.multiply(np.log10(energie),10)

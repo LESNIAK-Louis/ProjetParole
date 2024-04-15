@@ -18,7 +18,7 @@ def zeroCrossing(partie_du_signal):
 def computeZeroCrossing(signal, m, N):
     pasageZero = []
 
-    for i in range(0, len(signal)-N, m): 
+    for i in range(0, len(signal)-(2*N), m): 
         pasageZero.append(zeroCrossing(signal[i:i+N+1]))
 
     return pasageZero
