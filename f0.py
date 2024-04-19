@@ -16,12 +16,12 @@ def computeF0(freqsampling, autoCorrelTab, zeroTab, energyTab):
     f0 = []
 
     lastDecision0 = 0
-    SEUIL_HAUT_0 = 0.15
+    SEUIL_HAUT_0 = 0.13
     SEUIL_BAS_0 = 0.08
 
     lastDecisionE = 0
-    SEUIL_HAUT_E = 90
-    SEUIL_BAS_E = 55
+    SEUIL_HAUT_E = 92
+    SEUIL_BAS_E = 87
 
     # Aperçu des valeurs
     #for i in range(0,len(zeroTab)):
